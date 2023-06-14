@@ -2,10 +2,13 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import Button from "../components/ui/Button";
 import { Colors } from "../constants/style";
+import { StackNavigationProp } from "@react-navigation/stack/lib/typescript/src/types";
 
-type Props = {};
+type Props = {
+  navigation: StackNavigationProp<any, any>;
+};
 
-const LandingScreen = (props: Props) => {
+const LandingScreen = ({ navigation }: Props) => {
   return (
     <View style={styles.rootContainer}>
       <View style={styles.headerContainer}>
@@ -15,7 +18,7 @@ const LandingScreen = (props: Props) => {
 
         <Button
           onPress={() => {
-            console.log("button Pressed");
+            navigation.navigate("LoginScreen");
           }}
           style={styles.buttonContainer}
         >
@@ -23,7 +26,11 @@ const LandingScreen = (props: Props) => {
         </Button>
         <View style={styles.signUpContainer}>
           <Text style={styles.signUpText}>Don't have an account?</Text>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("SignUpScreen");
+            }}
+          >
             <Text style={styles.signUpLinkText}>Create a new user.</Text>
           </TouchableOpacity>
         </View>
@@ -33,7 +40,7 @@ const LandingScreen = (props: Props) => {
         <View style={styles.footerButtonContainer}>
           <Button
             onPress={() => {}}
-            style={{ backgroundColor: Colors.background100, borderRadius: 8 }}
+            style={{ backgroundColor: "#fff", borderRadius: 8 }}
           >
             <Text style={styles.buttonText}>Sign in with google</Text>
           </Button>
@@ -56,6 +63,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "space-between",
+    backgroundColor: "#fff",
   },
 
   headerContainer: {
