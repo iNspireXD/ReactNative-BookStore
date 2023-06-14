@@ -1,41 +1,40 @@
-import { StyleSheet, Text, View, Pressable } from "react-native";
-import React from "react";
+import { StyleSheet, View, Text, Pressable } from "react-native";
 import { Colors } from "../../constants/style";
 
 type Props = {
   children: React.ReactNode;
   onPress: any;
+  style?: object;
   mode?: string;
-  style: object;
-  icon?: string;
 };
 
-const Button = ({ children, onPress, mode, style }: Props) => {
+const GoalItems = ({ children, onPress, style, mode }: Props) => {
   return (
-    <View style={style}>
-      <Pressable onPress={onPress} android_ripple={{ color: "#6f657d" }}>
-        <View style={styles.button}>
-          <Text style={styles.text}>{children}</Text>
-        </View>
-      </Pressable>
-    </View>
+    <Pressable
+      onPress={onPress}
+      style={({ pressed }) => [style, pressed && styles.pressed]}
+    >
+      <View style={styles.button}>
+        <Text style={styles.text}>{children}</Text>
+      </View>
+    </Pressable>
   );
 };
 
-export default Button;
+export default GoalItems;
 
 const styles = StyleSheet.create({
-  rootContainer: {
-    backgroundColor: Colors.accent100,
-    borderRadius: 8,
-  },
   button: {
-    padding: 8,
+    margin: 10,
+    justifyContent: "center",
+    alignItems: "center",
   },
+
   text: {
-    color: Colors.background100,
-    padding: 14,
-    fontSize: 16,
-    textAlign: "center",
+    padding: 8,
+    color: "white",
+  },
+  pressed: {
+    opacity: 0.75,
   },
 });
